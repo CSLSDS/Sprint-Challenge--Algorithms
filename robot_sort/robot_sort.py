@@ -94,10 +94,27 @@ class SortingRobot:
 
     def sort(self):
         """
-        Sort the robot's list.
+        swap item, move, swap item again to 'shift' position
+        calls for selection sort
         """
-        # Fill this out
-        pass
+        self.set_light_on()
+        # while light is on...
+        while self.light_is_on():
+            self.swap_item() # 'pick up' or select next item
+            if not self.can_move_right(): # check if we're at the end of the list...
+                self.set_light_off()      # ...once true, can turn off and end while-loop
+            while self.can_move_right():  # until then...
+                self.move_right()         # proceed right-ward
+
+                if self.compare_item() == 1: # if held item is heavier...
+                    self.swap_item()         # ... put it down, pick up lighter one
+            
+            # if not heavier, look for empty place to the left
+            while self.compare_item() is not None:
+                self.move_left()
+            # final steps before looping
+            self.swap_item()            # put lighter item down in compare_item == None space
+            self.move_right()           # move rightward
 
 
 if __name__ == "__main__":
