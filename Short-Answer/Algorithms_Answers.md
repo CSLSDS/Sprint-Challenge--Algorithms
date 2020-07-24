@@ -61,3 +61,12 @@ and if it does, the safe floor is the one below.
 ...which can be computed in O(n) time.
 
 However, because we can presume that the breakpoint of eggs increases and decreases linearly between floors because of the laws of physics, with building floors being a necessarily ordered array, we can use binary searching to **reduce our search time to O(log(n))**, meaning we would start our search at the midpoint of the total number of floors, more rapidly 'searching' for the answer by eliminating irrelevant floors to check, substantially reducing our runtime complexity for increasingly tall buildings.
+
+```python
+if egg is not broken at floor[0]:
+    move to mid
+    drop an egg
+    if breaks, move down halfway
+    else move up halfway
+    repeat until breakpoint defined, below which eggs are safe
+```
